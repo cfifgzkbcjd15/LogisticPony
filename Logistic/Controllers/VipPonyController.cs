@@ -17,7 +17,7 @@ namespace Logistic.Controllers
         }
         [HttpPost]
         [RequestSizeLimit(100_000_000_000)]
-        public string SaveFile()
+        public async Task<string> SaveFile()
         {
             var uploadedFile = Request.Form.Files.First();
             try
@@ -26,7 +26,7 @@ namespace Logistic.Controllers
                 {
                     using (var stream = uploadedFile.OpenReadStream())
                     {
-                        download.ImportSte(stream);
+                        await download.ImportSte(stream);
                     }
                     return "Success";
                 }

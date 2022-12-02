@@ -13,13 +13,14 @@ public partial class VipPonyContext : DbContext
     public VipPonyContext(DbContextOptions<VipPonyContext> options)
         : base(options)
     {
+        AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
     }
 
     public virtual DbSet<DataPony> DataPonies { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=VipPony;Username=postgres;Password=ihesop69");
+        => optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=vipPony;Username=postgres;Password=ghfqv2002");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

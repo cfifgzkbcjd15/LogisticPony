@@ -2,6 +2,6 @@
 {
         public interface IDownload
         {
-            void ImportSte(Stream stream);
+            Task ImportSte(Stream stream);
         }
 }

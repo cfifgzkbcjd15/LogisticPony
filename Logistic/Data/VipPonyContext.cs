@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Logistic.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Logistic.Data;

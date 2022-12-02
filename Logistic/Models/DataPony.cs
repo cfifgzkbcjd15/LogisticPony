@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Logistic.Data;
+namespace Logistic.Models;
 
 public partial class DataPony
 {

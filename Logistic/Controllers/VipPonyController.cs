@@ -15,6 +15,13 @@ namespace Logistic.Controllers
         {
             download = _download;
         }
+        [HttpGet]
+        public string Test()
+        {
+            var test = new BuildingMap();
+            test.FiltrMap();
+            return "";
+        }
         [HttpPost]
         [RequestSizeLimit(100_000_000_000)]
         public async Task<string> SaveFile()

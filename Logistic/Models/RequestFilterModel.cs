@@ -7,6 +7,6 @@
         public short UserId { get; set; }
         public short AreaId { get; set; }
         public bool IsMore { get; set; }
-
+        public int Page { get; set; }
     }
 }

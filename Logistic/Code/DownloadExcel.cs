@@ -29,7 +29,7 @@ namespace Logistic.Code
             var pony = new List<DataPony>();
             db.DataPonies.RemoveRange(db.DataPonies);
             db.SaveChanges();
-            while (rowIndex != 10000)
+            while (rowIndex != 1)
             {
                 pony.Add(new DataPony
                 {

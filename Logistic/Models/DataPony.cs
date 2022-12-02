@@ -13,13 +13,7 @@ public partial class DataPony
 
     public Guid RouteId { get; set; }
 
-    public DateTime StartDate { get; set; }
-
-    public DateTime EndDate { get; set; }
-
     public Guid PointId { get; set; }
-
-    public DateTime Date { get; set; }
 
     public short UserId { get; set; }
 
@@ -30,4 +24,10 @@ public partial class DataPony
     public decimal Latitude { get; set; }
 
     public decimal Longitde { get; set; }
+
+    public DateTime StartDate { get; set; }
+
+    public DateTime EndDate { get; set; }
+
+    public DateTime Date { get; set; }
 }

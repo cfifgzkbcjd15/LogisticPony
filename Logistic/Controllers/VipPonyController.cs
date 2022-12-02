@@ -43,8 +43,8 @@ namespace Logistic.Controllers
                         UserId = x.UserId,
                         Latitude = x.Latitude,
                         Longitde = x.Longitde
-                    }).Take(100)
-                .Skip(model.Page * 100)
+                    }).Take(50)
+                .Skip(model.Page * 50)
                 .OrderBy(x => x.Latitude)
                 .ThenBy(x => x.Longitde)
                 .ToListAsync();
@@ -122,7 +122,7 @@ namespace Logistic.Controllers
             }
             catch (Exception err)
             {
-                return "error";
+                return err.Message;
             }
             return "";
         }

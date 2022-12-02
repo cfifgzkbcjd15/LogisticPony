@@ -2,6 +2,7 @@
 using NPOI.XSSF.UserModel;
 using Logistic.Data;
 using Logistic.Models;
+using System.Globalization;
 
 namespace Logistic.Code
 {
@@ -31,6 +32,9 @@ namespace Logistic.Code
             db.SaveChanges();
             while (rowIndex != 1)
             {
+                //var date = Convert.ToDateTime(sheet.GetRow(rowIndex).GetCell(4).ToString());
+                //var date2 = Convert.ToDateTime(sheet.GetRow(rowIndex).GetCell(5).ToString());
+                //var date3 = Convert.ToDateTime(sheet.GetRow(rowIndex).GetCell(9).ToString());
                 pony.Add(new DataPony
                 {
                     Id = Guid.NewGuid(),
@@ -41,8 +45,8 @@ namespace Logistic.Code
                     StartDate = Convert.ToDateTime(sheet.GetRow(rowIndex).GetCell(4).ToString()),
                     EndDate = Convert.ToDateTime(sheet.GetRow(rowIndex).GetCell(5).ToString()),
                     PointId = new Guid(sheet.GetRow(rowIndex).GetCell(6).ToString()),
-                    Latitude = Convert.ToDecimal(sheet.GetRow(rowIndex).GetCell(7).ToString()),
-                    Longitde = Convert.ToDecimal(sheet.GetRow(rowIndex).GetCell(8).ToString()),
+                    Latitude = decimal.Parse(sheet.GetRow(rowIndex).GetCell(7).ToString(), CultureInfo.InvariantCulture),
+                    Longitde = decimal.Parse(sheet.GetRow(rowIndex).GetCell(8).ToString(), CultureInfo.InvariantCulture),
                     Date = Convert.ToDateTime(sheet.GetRow(rowIndex).GetCell(9).ToString()),
                     UserId = Convert.ToInt16(sheet.GetRow(rowIndex).GetCell(10).ToString()),
                     OrderNum = Convert.ToInt16(sheet.GetRow(rowIndex).GetCell(11).ToString()),

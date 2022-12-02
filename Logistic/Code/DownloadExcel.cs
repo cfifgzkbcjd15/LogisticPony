@@ -31,7 +31,6 @@ namespace Logistic.Code
             db.SaveChanges();
             while (rowIndex != 10000)
             {
-                var date = Convert.ToDateTime(sheet.GetRow(rowIndex).GetCell(9).ToString());
                 pony.Add(new DataPony
                 {
                     Id = Guid.NewGuid(),
@@ -39,12 +38,12 @@ namespace Logistic.Code
                     AreaId = Convert.ToInt16(sheet.GetRow(rowIndex).GetCell(1).ToString()),
                     SubareaId = Convert.ToInt16(sheet.GetRow(rowIndex).GetCell(2).ToString()),
                     RouteId = new Guid(sheet.GetRow(rowIndex).GetCell(3).ToString()),
-                    StartDate = sheet.GetRow(rowIndex).GetCell(4).ToString(),
-                    EndDate = sheet.GetRow(rowIndex).GetCell(5).ToString(),
+                    StartDate = Convert.ToDateTime(sheet.GetRow(rowIndex).GetCell(4).ToString()),
+                    EndDate = Convert.ToDateTime(sheet.GetRow(rowIndex).GetCell(5).ToString()),
                     PointId = new Guid(sheet.GetRow(rowIndex).GetCell(6).ToString()),
                     Latitude = Convert.ToDecimal(sheet.GetRow(rowIndex).GetCell(7).ToString()),
                     Longitde = Convert.ToDecimal(sheet.GetRow(rowIndex).GetCell(8).ToString()),
-                    Date = date,
+                    Date = Convert.ToDateTime(sheet.GetRow(rowIndex).GetCell(9).ToString()),
                     UserId = Convert.ToInt16(sheet.GetRow(rowIndex).GetCell(10).ToString()),
                     OrderNum = Convert.ToInt16(sheet.GetRow(rowIndex).GetCell(11).ToString()),
 

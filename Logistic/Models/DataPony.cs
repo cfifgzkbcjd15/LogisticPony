@@ -13,9 +13,9 @@ public partial class DataPony
 
     public Guid RouteId { get; set; }
 
-    public string StartDate { get; set; } = null!;
+    public DateTime StartDate { get; set; }
 
-    public string EndDate { get; set; } = null!;
+    public DateTime EndDate { get; set; }
 
     public Guid PointId { get; set; }
 

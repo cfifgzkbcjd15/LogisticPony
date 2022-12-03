@@ -14,11 +14,13 @@ namespace Logistic.Controllers
     {
         private IDownload download;
         private VipPonyContext db;
+        private IWebHostEnvironment env;
 
-        public VipPonyController(IDownload _download, VipPonyContext _db)
+        public VipPonyController(IDownload _download, VipPonyContext _db,IWebHostEnvironment _env)
         {
             download = _download;
             db = _db;
+            env = _env;
         }
         [HttpPost("FilerList")]
         public async Task GetFilterList(RequestFilterModel model)
@@ -50,7 +52,7 @@ namespace Logistic.Controllers
                 .ToListAsync();
 
                 var buildingMap = new BuildingMap();
-                var html = buildingMap.FiltrMap(data.Select(x => new RangePoint { Latitude = x.Latitude, Longitde = x.Longitde }).ToList());
+                var html = buildingMap.FiltrMap(data.Select(x => new RangePoint { Latitude = x.Latitude, Longitde = x.Longitde }).ToList(),env.WebRootPath);
                 var query = new ResponsePony
                 {
                     Reports = data,
@@ -86,7 +88,7 @@ namespace Logistic.Controllers
                 .ToListAsync();
 
                 var buildingMap = new BuildingMap();
-                var html = buildingMap.FiltrMap(data.Select(x => new RangePoint { Latitude = x.Latitude, Longitde = x.Longitde }).ToList());
+                var html = buildingMap.FiltrMap(data.Select(x => new RangePoint { Latitude = x.Latitude, Longitde = x.Longitde }).ToList(),env.WebRootPath);
                 var query = new ResponsePony
                 {
                     Reports = data,

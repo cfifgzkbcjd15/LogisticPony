@@ -52,7 +52,7 @@ namespace Logistic.Controllers
                 .ToListAsync();
 
                 var buildingMap = new BuildingMap();
-                var html = buildingMap.FiltrMap(data.Select(x => new RangePoint { Latitude = x.Latitude, Longitde = x.Longitde }).ToList(),env.WebRootPath);
+                var html = buildingMap.FiltrMap(data.Select(x => new List<decimal> {x.Latitude, x.Longitde }).ToList());
                 var query = new ResponsePony
                 {
                     Reports = data,
@@ -88,7 +88,7 @@ namespace Logistic.Controllers
                 .ToListAsync();
 
                 var buildingMap = new BuildingMap();
-                var html = buildingMap.FiltrMap(data.Select(x => new RangePoint { Latitude = x.Latitude, Longitde = x.Longitde }).ToList(),env.WebRootPath);
+                var html = buildingMap.FiltrMap(data.Select(x => new List<decimal> { x.Latitude, x.Longitde }).ToList());
                 var query = new ResponsePony
                 {
                     Reports = data,

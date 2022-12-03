@@ -1,0 +1,47 @@
+html
+{
+    
+}
+body
+{
+    background-color: #212121;
+    
+}
+
+.labelMenu
+{
+    color: white;
+    margin: 0px;
+}
+
+.bg-light {
+    --bs-bg-opacity: 1;
+    background-color: #000000!important;
+    color: white;
+}
+
+.navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .show>.nav-link {
+    color: white;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: white;
+}
+
+.navbar-light .navbar-nav .nav-link:hover {
+    color: white;
+}
+
+.navbar-light .navbar-brand {
+    color: white;
+}
+
+.row.g-3.needs-validation.menuValidation {
+    background-color: #000000;
+    padding: 10px;
+    margin: 0.1rem;
+    border-radius: 10px;
+    border: 1px solid #212121;
+}
+
+#map {position:absolute;top:0;bottom:0;right:0;left:0;}

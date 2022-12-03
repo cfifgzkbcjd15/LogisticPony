@@ -26,19 +26,16 @@ namespace Logistic.Code
             var jsonPoints = JsonSerializer.Serialize(points);
             var proc = new Process();
             proc.StartInfo.FileName = "cmd.exe";
-            proc.StartInfo.WorkingDirectory = @"D:";
-            proc.StartInfo.WindowStyle = ProcessWindowStyle.Normal;
-            proc.StartInfo.UseShellExecute = false;
-            proc.StartInfo.RedirectStandardOutput = true;
             proc.StartInfo.RedirectStandardInput = true;
             proc.StartInfo.CreateNoWindow = false;
 
             proc.Start();
             proc.StandardInput.WriteLine(@"cd D:/Desktop/Proekts/Logistic/Logistic/bin/Debug");
-            //proc.StandardInput.WriteLine($"python -c \"import main; print(main.parse({jsonPoints}))\"");
+            proc.StandardInput.WriteLine($"python -c \"import main; print(main.parse({jsonPoints}))\"");
             var output = proc.StandardOutput.ReadToEnd();
-            //proc.Close();
-            proc.WaitForExit();
+            proc.Close();
+            proc.Dispose();
+            //proc.WaitForExit();
             return output.ToString();
             //
             //proc.Kill();

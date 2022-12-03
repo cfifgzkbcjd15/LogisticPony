@@ -51,12 +51,12 @@ namespace Logistic.Controllers
                 .ThenBy(x => x.Longitde)
                 .ToListAsync();
 
-                var buildingMap = new BuildingMap();
-                var html = buildingMap.FiltrMap(data.Select(x => new List<decimal> {x.Latitude, x.Longitde }).ToList());
+                //var buildingMap = new BuildingMap();
+                //var html = buildingMap.FiltrMap(data.Select(x => new List<decimal> {x.Latitude, x.Longitde }).ToList());
                 var query = new ResponsePony
                 {
                     Reports = data,
-                    Html = html
+                    Html = null
                 };
 
             }
@@ -87,12 +87,12 @@ namespace Logistic.Controllers
                 .ThenBy(x => x.Longitde)
                 .ToListAsync();
 
-                var buildingMap = new BuildingMap();
-                var html = buildingMap.FiltrMap(data.Select(x => new List<decimal> { x.Latitude, x.Longitde }).ToList());
+                //var buildingMap = new BuildingMap();
+                //var html = buildingMap.FiltrMap(data.Select(x => new List<decimal> { x.Latitude, x.Longitde }).ToList());
                 var query = new ResponsePony
                 {
                     Reports = data,
-                    Html = html
+                    Html = null
                 };
             }
         }

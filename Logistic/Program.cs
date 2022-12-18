@@ -39,7 +39,7 @@ app.UseCors("AllOrigins");
 app.UseSwagger();
     app.UseSwaggerUI();
 //}
-//Scaffold-DbContext "Host=localhost;Port=5432;Database=VipPony;Username=postgres;Password=ihesop69" Npgsql.EntityFrameworkCore.PostgreSQL -OutputDir "Data"
+//Scaffold-DbContext "Host=localhost;Port=5432;Database=VipPony;Username=postgres;Password=" Npgsql.EntityFrameworkCore.PostgreSQL -OutputDir "Data"
 
 app.UseAuthorization();
 

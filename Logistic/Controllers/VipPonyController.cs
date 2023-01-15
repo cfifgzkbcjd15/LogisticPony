@@ -16,14 +16,14 @@ namespace Logistic.Controllers
         private VipPonyContext db;
         private IWebHostEnvironment env;
 
-        public VipPonyController(IDownload _download, VipPonyContext _db,IWebHostEnvironment _env)
+        public VipPonyController(IDownload _download, VipPonyContext _db, IWebHostEnvironment _env)
         {
             download = _download;
             db = _db;
             env = _env;
         }
         [HttpPost("FilerList")]
-        public async Task GetFilterList(RequestFilterModel model)
+        public async Task<ResponsePony> GetFilterList(RequestFilterModel model)
         {
             if (model.IsMore)
             {
@@ -31,7 +31,7 @@ namespace Logistic.Controllers
                 IQueryable<DataPony> reports = db.DataPonies.Where(x => x.StartDate >= model.DateStart && x.EndDate <= model.DateEnd);
 
                 if (model.AreaId > 0)
-                    reports.Where(x => x.AreaId == model.AreaId);
+                    reports = reports.Where(x => x.AreaId == model.AreaId);
 
                 var data = await reports
                     .AsNoTracking()
@@ -58,6 +58,7 @@ namespace Logistic.Controllers
                     Reports = data,
                     Html = null
                 };
+                return query;
 
             }
             else
@@ -65,9 +66,9 @@ namespace Logistic.Controllers
                 IQueryable<DataPony> reports = db.DataPonies.Where(x => x.StartDate >= model.DateStart && x.EndDate <= model.DateEnd);
 
                 if (model.UserId > 0)
-                    reports.Where(x => x.UserId == model.UserId);
+                    reports = reports.Where(x => x.UserId == model.UserId);
                 if (model.AreaId > 0)
-                    reports.Where(x => x.AreaId == model.AreaId);
+                    reports = reports.Where(x => x.AreaId == model.AreaId);
 
                 var data = await reports
                     .AsNoTracking()
@@ -82,7 +83,7 @@ namespace Logistic.Controllers
                         Latitude = x.Latitude,
                         Longitde = x.Longitde
                     }).Take(100)
-                .Skip(model.Page * 100)
+                .Skip(model.Page * 50)
                 .OrderBy(x => x.Latitude)
                 .ThenBy(x => x.Longitde)
                 .ToListAsync();
@@ -94,6 +95,7 @@ namespace Logistic.Controllers
                     Reports = data,
                     Html = null
                 };
+                return query;
             }
         }
         [HttpGet("GetFilter")]
@@ -104,7 +106,80 @@ namespace Logistic.Controllers
                 AreaId = await db.DataPonies.AsNoTracking().Select(x => x.AreaId).Distinct().OrderBy(x => x).ToListAsync(),
                 UserId = await db.DataPonies.AsNoTracking().Select(x => x.UserId).Distinct().OrderBy(x => x).ToListAsync()
             };
-            return data; ;
+            return data;
+        }
+        [HttpPost("addPony")]
+        public async Task<string> Post(EditPonyRequest model)
+        {
+            try
+            {
+                await db.DataPonies.AddAsync(new DataPony
+                {
+                    Id = Guid.NewGuid(),
+                    AreaId = model.AreaId,
+                    CategoryWork = model.AreaId,
+                    Date = DateTime.Now,
+                    StartDate = model.StartDate,
+                    EndDate = model.EndDate,
+                    Latitude = model.Latitude,
+                    Longitde = model.Longitde,
+                    OrderNum = model.OrderNum,
+                    PointId = model.PointId,
+                    RouteId = model.RouteId,
+                    SubareaId = model.SubareaId,
+                    UserId = model.UserId
+                }); ; ;
+                await db.SaveChangesAsync();
+                return "Success";
+
+            }
+            catch
+            {
+                return "Error";
+            }
+        }
+        [HttpDelete("{userId}")]
+        public async Task<string> Delete(int userId)
+        {
+            try
+            {
+                var data = await db.DataPonies.Where(x => x.UserId == userId).ToListAsync();
+                db.RemoveRange(data);
+                await db.SaveChangesAsync();
+                return "Success";
+            }
+            catch
+            {
+                return "Error";
+            }
+        }
+        [HttpPut("{id}")]
+        public async Task<string> Put(Guid id, EditPonyRequest model)
+        {
+            try
+            {
+                var data = await db.DataPonies.FirstOrDefaultAsync(x => x.Id == id);
+                data.AreaId = model.AreaId;
+                data.CategoryWork = model.AreaId;
+                data.Date = DateTime.Now;
+                data.StartDate = model.StartDate;
+                data.EndDate = model.EndDate;
+                data.Latitude = model.Latitude;
+                data.Longitde = model.Longitde;
+                data.OrderNum = model.OrderNum;
+                data.PointId = model.PointId;
+                data.RouteId = model.RouteId;
+                data.SubareaId = model.SubareaId;
+                data.UserId = model.UserId;
+                db.Update(data);
+                await db.SaveChangesAsync();
+                return "Success";
+
+            }
+            catch
+            {
+                return "Error";
+            }
         }
         [HttpPost]
         [RequestSizeLimit(100_000_000_000)]
